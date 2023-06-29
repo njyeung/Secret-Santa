@@ -1,11 +1,17 @@
 const addButton = document.querySelector(".add");
 const input = document.querySelector(".input-group");
 const submit = document.querySelector(".submit");
-const data = document.getElementsByClassName(".text");
+const data = document.getElementsByClassName("text");
 
 function submitForm() {
+    let isName = true;
+
     Array.from(data).forEach((element) => {
         console.log(element.value);
+        let data = element.value;
+        if(data == "") {
+            submit.value = "INVALID"
+        }
     });
 }
 
