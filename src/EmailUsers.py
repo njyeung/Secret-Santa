@@ -8,7 +8,7 @@ password = "lyistjtetsbehxpy"
 subject = "Secret Santa Generator"
 
 def email(person1, email1, person2, email2):
-    message = "Hello " + person1 + "! Your Secret Santa is: " + person2 + "." + "\n" + "Their email is: " + email2 + "." + "\n" + "Merry Christmas!"
+    message = "Hello " + person1 + "! You are " + person2 + "'s Secret Santa!" + "\n" + "Their email is: " + email2 + "." + "\n" + "Merry Christmas!"
     print(message)
     e = EmailMessage()
     e["from"] = email_sender
