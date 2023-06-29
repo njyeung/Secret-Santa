@@ -1,5 +1,13 @@
 const addButton = document.querySelector(".add");
 const input = document.querySelector(".input-group");
+const submit = document.querySelector(".submit");
+const data = document.getElementsByClassName(".text");
+
+function submitForm() {
+    Array.from(data).forEach((element) => {
+        console.log(element.value);
+    });
+}
 
 function deleteInput() {
     const form = this.parentElement;
@@ -10,10 +18,12 @@ function addInput() {
     console.log("addInput");
 
     const name = document.createElement('input');
+    name.className = "text";
     name.type = "text";
     name.placeholder = "Name";
 
     const email = document.createElement("input");
+    email.className = "text";
     email.type = "text";
     email.placeholder = "Email";
     
@@ -38,4 +48,4 @@ function addInput() {
 }
 
 addButton.addEventListener("click", addInput);
-
+submit.addEventListener("click", submitForm);
