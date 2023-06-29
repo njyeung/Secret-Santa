@@ -17,7 +17,7 @@
                 justify-content: center;
                 align-items: center;
                 background-color: #861657;
-                background-image: linear-gradient(180deg, #750c4a 0%, #ffa69e 74%);
+                background-image: linear-gradient(192deg, #750c4a 10%, #ffa69e 74%);
             }
             .container {
                 background: white;
@@ -50,6 +50,41 @@
                 align-items: center;
 
             }
+            .delete {
+                margin-right: 10px;
+                margin-left: 20px;
+                text-decoration: none;
+                display: inline-block;
+                border-radius: 5px;
+                width: 30px;
+                height: 30px;
+                color: white;
+                background: rgb(196, 22, 22);
+                font-size: 2rem;
+                font-weight: bolder;
+                display:flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+            .falseDelete {
+                margin-right: 10px;
+                margin-left: 20px;
+                text-decoration: none;
+                display: inline-block;
+                border-radius: 5px;
+                width: 30px;
+                height: 30px;
+                color: white;
+                background: rgb(196, 22, 22);
+                font-size: 2rem;
+                font-weight: bolder;
+                display:flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                visibility: hidden;
+            }
             h1 {
                 color: black;
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -66,7 +101,6 @@
                 text-align: center;
             }
             form {
-                margin: 20px;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -80,7 +114,21 @@
                 border-color:#750c4a;
                 margin: 10px;
                 padding: 5px;
-                font-size: 20px;
+                font-size: 16px;
+            }
+            input[type=submit] {
+                width: 120px;
+                height: 40px;
+                border-radius: 5px;
+                border-style:groove;
+                border-color:#750c4a;
+                padding: 5px;
+                font-size: 16px;
+                font-weight: bolder;
+                background: rgb(109, 27, 72);
+                color: white;
+                margin-left: 50%;
+                transform: translateX(-50%);
             }
         </style>
     </head>
@@ -92,18 +140,24 @@
                     <h2>Enter the name and email of each person</h2>
                     <h2>When you are done, click submit</h2>
                 </div>
-                <a href ="#" class = "add">&plus;</a>
+                <a href ="#" class="add">&plus;</a>
             </div>
-            <div class = input-group>
 
+            <br>
+
+            <div class = input-group>
+                <form>
+                    <input type="text" name="name" placeholder="Name">
+                    <input type="text" name="email" placeholder="Email">
+                </form>
+                
             </div>
-            <form>
-                <input type="text" name="name" placeholder="Name">
-                <input type="text" name="email" placeholder="Email">
-                <input type="button" value="Add">
-            </form>
+
+            <br>
+
             <input type="submit" value="Submit">
         </div>
-        
+
+        <script src="script.js"></script>
     </body>
 </html>
