@@ -15,6 +15,7 @@ public class SecretSanta {
   
   public static void main(String args[]) {
 
+    // TEMPORARY SOLUTION, WILL BE REPLACED WITH DATABASE
     // Load set of people from file
     try {
       peopleSet = load("People.txt");
@@ -39,6 +40,14 @@ public class SecretSanta {
       writeMatches(matches, "Results.txt");
     } catch (IOException e) {
       System.out.println("Caught an IOException from writeMatches");
+      System.exit(1);
+    }
+
+    // Run python script to send emails from text file
+    try {
+      Runtime.getRuntime().exec("python3 SendEmails.py");
+    } catch (IOException e) {
+      System.out.println("Caught an IOException from running SendEmails.py");
       System.exit(1);
     }
   }

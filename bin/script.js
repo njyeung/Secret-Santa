@@ -5,14 +5,47 @@ const data = document.getElementsByClassName("text");
 
 function submitForm() {
     let isName = true;
+    let returnString = "";
 
     Array.from(data).forEach((element) => {
-        console.log(element.value);
-        let data = element.value;
         if(data == "") {
-            submit.value = "INVALID"
+            invalidInput();
+            return;
         }
+        console.log(element.value);
+        // let data = element.value;
+        // if(isName == true) {
+        //     returnString += data + ",";
+        //     isName = false;
+        // }
+        // else{
+        //     returnString += data + "\n";
+        //     isName = true;
+        // }
+        
+        // Send data to server
+        // fetch("http://localhost:3000", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //         name: data,
+        //     }),
+
     });
+}
+
+function invalidInput() {
+    submit.value = "INVALID"
+    submit.style.backgroundColor = "red";
+    submit.style.color = "white";
+}
+
+function validInput() {
+    submit.value = "SUBMITTED"
+    submit.style.backgroundColor = "green";
+    submit.style.color = "white";
 }
 
 function deleteInput() {
