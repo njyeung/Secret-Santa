@@ -4,13 +4,15 @@ const submit = document.querySelector(".submit");
 const data = document.getElementsByClassName("text");
 
 function submitForm() {
-    let isName = true;
-    let returnString = "";
+    // let isName = true;
+    // let returnString = "";
 
+    isValid = true;
     Array.from(data).forEach((element) => {
-        if(data == "") {
+        if(element.value == "") {
+            console.log("Invalid Input")
             invalidInput();
-            return;
+            isValid = false;
         }
         console.log(element.value);
         // let data = element.value;
@@ -22,8 +24,13 @@ function submitForm() {
         //     returnString += data + "\n";
         //     isName = true;
         // }
-        
-        // Send data to server
+    });
+
+    if(isValid == false) {return;}
+    
+    validInput();
+
+    // Send data to server
         // fetch("http://localhost:3000", {
         //     method: "POST",
         //     headers: {
@@ -32,13 +39,11 @@ function submitForm() {
         //     body: JSON.stringify({
         //         name: data,
         //     }),
-
-    });
 }
 
 function invalidInput() {
     submit.value = "INVALID"
-    submit.style.backgroundColor = "red";
+    submit.style.backgroundColor = "darkred";
     submit.style.color = "white";
 }
 
