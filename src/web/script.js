@@ -20,7 +20,7 @@ function submitForm() {
 }
 
 function pendingInput() {
-    submit.value = "SENDING..."
+    submit.value = "PENDING..."
     submit.style.backgroundColor = "darkgray";
     submit.style.color = "black";
 }
