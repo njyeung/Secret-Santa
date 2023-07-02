@@ -1,44 +1,20 @@
 const addButton = document.querySelector(".add");
 const input = document.querySelector(".input-group");
-const submit = document.querySelector(".submit");
 const data = document.getElementsByClassName("text");
+const submit = document.querySelector(".submit");
 
 function submitForm() {
-    // let isName = true;
-    // let returnString = "";
-
-    isValid = true;
+    const dataArray = [];
     Array.from(data).forEach((element) => {
-        if(element.value == "") {
-            console.log("Invalid Input")
-            invalidInput();
-            isValid = false;
-        }
-        console.log(element.value);
-        // let data = element.value;
-        // if(isName == true) {
-        //     returnString += data + ",";
-        //     isName = false;
-        // }
-        // else{
-        //     returnString += data + "\n";
-        //     isName = true;
-        // }
+        dataArray.push(element.value);
     });
-
-    if(isValid == false) {return;}
     
-    validInput();
-
-    // Send data to server
-        // fetch("http://localhost:3000", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //         name: data,
-        //     }),
+    eel.generate(dataArray)(function(ret) {
+        if(ret == true)
+            validInput();
+        else
+            invalidInput();
+    });
 }
 
 function invalidInput() {
@@ -92,4 +68,3 @@ function addInput() {
 }
 
 addButton.addEventListener("click", addInput);
-submit.addEventListener("click", submitForm);
