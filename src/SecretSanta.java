@@ -76,23 +76,25 @@ public class SecretSanta {
     Scanner scan = new Scanner(file);
 
     while (scan.hasNext()) {
-      String line = scan.nextLine();
+      String line = scan.nextLine().trim();
+
       if(!line.contains(",")) {
         throw new IllegalArgumentException("File is not formatted correctly");
       }
 
       String[] currInfo = line.split(",");
 
+      // Cleaning up array
       for(int i = 0; i<currInfo.length; i++) {
         currInfo[i] = currInfo[i].trim();
       }
 
       // If the line doesn't contain a name and email, it is skipped
-      if(currInfo.length == 0) {
+      if(currInfo.length == 0 || ((currInfo[0] == null|| currInfo[0].equals("")) && (currInfo[0] == null || currInfo[1].equals("")))) {
         continue;
       }
       // If the line only contains either the name or the email, it is invalid
-      if(currInfo[0] == null || currInfo[1] == null) {
+      if(currInfo.length == 1 || currInfo[0] == null || currInfo[0].equals("") || currInfo[1] == null || currInfo[1].equals("")) {
         throw new IllegalArgumentException("File is not formatted correctly");
       }
 
