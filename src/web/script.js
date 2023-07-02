@@ -9,12 +9,20 @@ function submitForm() {
         dataArray.push(element.value);
     });
     
+    pendingInput();
+    
     eel.generate(dataArray)(function(ret) {
         if(ret == true)
             validInput();
         else
             invalidInput();
     });
+}
+
+function pendingInput() {
+    submit.value = "SENDING..."
+    submit.style.backgroundColor = "darkgray";
+    submit.style.color = "black";
 }
 
 function invalidInput() {
@@ -24,7 +32,7 @@ function invalidInput() {
 }
 
 function validInput() {
-    submit.value = "SUBMITTED"
+    submit.value = "SENT!"
     submit.style.backgroundColor = "green";
     submit.style.color = "white";
 }
@@ -35,7 +43,6 @@ function deleteInput() {
 }
 
 function addInput() {
-    console.log("addInput");
 
     const name = document.createElement('input');
     name.className = "text";

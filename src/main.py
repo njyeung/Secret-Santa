@@ -1,20 +1,28 @@
-import eel
 import os
+
+# Check if eel is installed
+try:
+    import eel
+except ImportError:
+    print("Eel not installed. Installing now...")
+    os.system("pip install eel")
+    import eel
 
 def runJava():
     # Run the java program and get the exit status
+    compile("src/Person.java src/Matches.java src/SecretSanta.java")
+    exitStatus = run("-classpath src SecretSanta")
 
-    # Run SecretSanta.java
-    exitStatus = os.system("cmd /C \"\"C:\\Program Files\\Java\\jdk-17.0.4.1\\bin\\java.exe\" -cp \"C:\\Users\\nickj\\Desktop\\Secret Santa\\bin\" SecretSanta \"")
-
-    # Wait for program to execute and then read the file
-    file = open("People.txt", "r")
-    # Read the file and return the contents
-    if(file.read() == "sent" and exitStatus == 0):
+    if(exitStatus == 0):
         return True
     else:
         return False
 
+def compile(javaFile):
+    return os.system("javac " + javaFile)
+
+def run(javaFile):
+    return os.system("java " + javaFile)
 
 dirname = os.path.dirname(__file__)
 eel.init(os.path.join(dirname, "web/"))
@@ -29,6 +37,7 @@ def generate(array):
             file.write(array[x] + ",")
         else:
             file.write(array[x] + "\n")
+    file.close()
     return runJava()
 
 eel.start("index.html")

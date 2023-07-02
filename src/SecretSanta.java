@@ -18,12 +18,15 @@ public class SecretSanta {
     // TEMPORARY SOLUTION, WILL BE REPLACED WITH DATABASE
     // Load set of people from file
     try {
-      peopleSet = load("People.txt");
+
+      // Get parent directory
+      String parentDir = new File("SecretSanta.java").getAbsoluteFile().getParentFile().toString();
+      peopleSet = load(parentDir + "\\" + "People.txt");
     } catch (FileNotFoundException e) {
       System.out.println("Issue while loading people from file");
       System.exit(1);
     } catch(IllegalArgumentException e) {
-      System.out.println("Caught an IllegalArgumentException from load");
+      System.out.println("Caught an IllegalArgumentException from load()");
       System.exit(1);
     }
     
@@ -31,7 +34,6 @@ public class SecretSanta {
     try{
       matches = createMatches(peopleSet);
     } catch(IllegalArgumentException e) {
-      System.out.println(peopleSet.size() + " people loaded");
       System.out.println("The amount of people is invalid for creating secret santas");
       System.exit(1);
     } catch(IllegalStateException e) {
@@ -49,17 +51,12 @@ public class SecretSanta {
 
     // Run python script to send emails from text file
     try {
-      Runtime.getRuntime().exec("python3 SendEmails.py");
-    } catch (IOException e) {
+      Process p = Runtime.getRuntime().exec("python src/EmailUsers.py");
+      p.waitFor();
+      if(p.exitValue() == 1)
+        System.exit(1);
+    } catch (IOException | InterruptedException e) {
       System.out.println("Caught an IOException from running SendEmails.py");
-      System.exit(1);
-    }
-
-    // Write "sent" to people.txt
-    try {
-      writeSent("People.txt");
-    } catch (IOException e) {
-      System.out.println("Caught an IOException from writeSent");
       System.exit(1);
     }
   }
@@ -77,17 +74,25 @@ public class SecretSanta {
     Set<Person> returnSet = new HashSet<Person>();
     File file = new File(pathName);
     Scanner scan = new Scanner(file);
-    String[] currInfo = new String[2];
 
     while (scan.hasNext()) {
-      currInfo = scan.nextLine().split(",");
+      String line = scan.nextLine();
+      if(!line.contains(",")) {
+        throw new IllegalArgumentException("File is not formatted correctly");
+      }
+
+      String[] currInfo = line.split(",");
+
+      for(int i = 0; i<currInfo.length; i++) {
+        currInfo[i] = currInfo[i].trim();
+      }
 
       // If the line doesn't contain a name and email, it is skipped
-      if(currInfo[0].equals("") && currInfo[1].equals("")) {
+      if(currInfo.length == 0) {
         continue;
       }
       // If the line only contains either the name or the email, it is invalid
-      if(currInfo[0].equals("") || currInfo[1].equals("")) {
+      if(currInfo[0] == null || currInfo[1] == null) {
         throw new IllegalArgumentException("File is not formatted correctly");
       }
 
@@ -156,16 +161,6 @@ public class SecretSanta {
       try {writer.write(item + "\n");} 
       catch (IOException e) {e.printStackTrace();}
     });
-    writer.close();
-  }
-
-  /**
-   * Verifies that all emails have been sent
-   * @param pathName - name of the file write to
-   */
-  public static void writeSent(String pathName) throws IOException {
-    FileWriter writer = new FileWriter(pathName);
-    writer.write("sent");
     writer.close();
   }
 }

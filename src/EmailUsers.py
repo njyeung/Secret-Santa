@@ -39,5 +39,5 @@ while True:
     email2 = line[1].partition(" (")[2].partition(")")[0]
 
     email(person1, email1, person2, email2)
-    
+
 file.close()
